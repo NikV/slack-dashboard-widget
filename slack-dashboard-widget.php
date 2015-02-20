@@ -37,13 +37,20 @@ Class Slack_Dashboard_Widget {
 
 
 	public function dashboard_widget_function() {
+		if (! get_option('slack_dash_widget_name') == "") {
 
-		$jsonurl = get_option('slack_dash_widget_name');
-		$json = wp_remote_get($jsonurl);
-		$body = wp_remote_retrieve_body( $json );
-		$json_output = json_decode( $body );
-		foreach ($json_output->channels as $channel) {
-			echo "<ul><li>" . esc_html( $channel->name ) . "</li></ul>";
+			$jsonurl = get_option( 'slack_dash_widget_name' );
+			$json    = wp_remote_get( $jsonurl );
+
+			if ( is_wp_error( $json ) ) {
+				return "ERROR";
+			} else {
+				$body        = wp_remote_retrieve_body( $json );
+				$json_output =  json_decode( $body );
+				foreach ( $json_output->channels as $channel ) {
+					echo "<ul><li>" . esc_html( $channel->name ) . "</li></ul>";
+				}
+			}
 		}
 
 
