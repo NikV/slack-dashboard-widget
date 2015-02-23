@@ -58,12 +58,9 @@ Class Slack_Dashboard_Widget {
 }
 new Slack_Dashboard_Widget();
 
-
-// ------------------------------------------------------------------
-// Add all your sections, fields and settings during admin_init
-// ------------------------------------------------------------------
-//
-
+/**
+ * Add all your sections, fields and settings during admin_init
+ */ 
 function slack_dash_widgets_api_init() {
 	// Add the section to reading settings so we can add our
 	// fields to it
